@@ -11,7 +11,7 @@ import styles from './styles.scss';
 const Register = ({ token, error }) => (
   <Container className="w-25 my-4">
     <Form>
-        <h1><Link href='/'><a className={styles.passport_title}>Loop</a></Link></h1>
+        <h1><Link href='/'><a className={styles.passport_title}>Register</a></Link></h1>
         <hr />
 
         <FormGroup>

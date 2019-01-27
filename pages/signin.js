@@ -11,7 +11,7 @@ import styles from './styles.scss';
 const Signin = ({ token }) => (
   <Container className="w-25 my-4">
     <Form>
-        <h1><Link href='/'><a className={styles.passport_title}>The Boilerplate</a></Link></h1>
+        <h1><Link href='/'><a className={styles.passport_title}>Signin</a></Link></h1>
         <hr />
 
         <FormGroup>

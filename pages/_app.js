@@ -3,6 +3,8 @@ import App, { Container } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 
+import Header from '../components/Header/index';
+
 import withReduxStore from '../state/with-store';
 
 class Main extends App {
@@ -17,7 +19,7 @@ class Main extends App {
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossOrigin="anonymous" />
           <title>Loop</title>
         </Head>
-
+        <Header />
         <Provider store={reduxStore}>
           <Component {...pageProps} />
         </Provider>

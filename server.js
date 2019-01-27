@@ -15,9 +15,12 @@ e_app.use(bodyParser.json());
 e_app.use(bodyParser.urlencoded({ extended: false }));
 e_app.use(cookieParser());
 
+/* static folders */
+e_app.use(express.static('static'));
+
 /* database */
 const { database } = require('./database/database');
-const { User } = require('./database/models');
+const { User, Item } = require('./database/models');
 
 /* authentication */
 const passport = require('passport');
@@ -27,9 +30,17 @@ const auth = require('./routes/auth');
 e_app.use('/auth', auth);
 // e_app.use('/api', passport.authenticate('jwt', { session: false }), user);
 
+const items = require('./routes/items');
+e_app.use('/item', items);
+
+const upload = require('./routes/upload.js');
+e_app.use('/api', passport.authenticate('jwt', { session: false }), upload);
+
 e_app.get('*', n_handler);
 
-User.sync({ force: true }).then(() => {});
+User.sync({  }).then(() => {});
+
+Item.sync({ }).then(() => {});
 
 database.sync().then(() => {
   n_app.prepare().then(() => {

@@ -8,6 +8,18 @@ const User = database.define('user', {
   password: {
     type: Sequelize.STRING
   }
-})
+});
 
-module.exports = { User };
+const Item = database.define('item', {
+	name: {
+		type: Sequelize.STRING
+	},
+	user: {
+		type: Sequelize.STRING
+	},
+	taken: {
+		type: Sequelize.BOOLEAN
+	}
+});
+
+module.exports = { User, Item };

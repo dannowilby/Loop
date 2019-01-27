@@ -1,27 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { connect } from 'react-redux';
-import { Container, Button } from 'reactstrap';
+import { Container, Row, Button } from 'reactstrap';
+
+import ProductIcon from '../components/ProductIcon/index';
+import { cn } from '../util/util';
 
 import styles from './styles.scss';
 
-const Index = ({ token }) => (
-  <Container className="text-center my-4">
-    <h3>This is a boilerplate.</h3>
-    <p><Link prefetch href='/home'><a>another page</a></Link></p>
+class Index extends Component {
+	constructor(props) {
+		super(props);
 
-    <Button className="px-4" outline color="primary" onClick={() => {
-        alert(token)
-    }}>Show Login Token</Button>
+		this.state = {
+			items: []
+		};
+	}
 
-  </Container>
-);
+	componentDidMount() {
+		
+		axios.get('/item/home').then(resp => {
+			this.setState({ items: resp.data });
+			console.log(resp.data);
+		});
+	}
 
-const mstp = (state) => ({
-  token: state.token
-});
+	render() {
+		return (
+		  <Container className={cn("container", "text-center", "my-4")}>
+		    <h3><Link prefetch href="/item"><a>Loop</a></Link></h3>
 
-const mdtp = (dispatch) => ({});
+		    <Row>
+		    	{
+		    		this.state.items.map((i, k) => (
+		    		<div key={k} className={cn("col-4")}>
+		    			<ProductIcon name={i.name} image={`/static/images/${i.user}_${i.id}.jpeg`} />
+		    		</div>
+		    	))}
+		    </Row>
 
-export default connect(mstp, mdtp)(Index);
+		  </Container>
+		);
+	}
+}
+
+export default Index;
