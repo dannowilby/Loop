@@ -29,11 +29,12 @@ class Index extends Component {
 	render() {
 		return (
 		  <Container className={cn("container", "text-center", "my-4")}>
-		    <h3><Link prefetch href="/item"><a>Loop</a></Link></h3>
+		 	 <Header />
+		    <h3><Link prefetch href="/item"><a>List an Item</a></Link></h3>
 
 		    <Row>
 		    	{
-		    		this.state.items.map((i, k) => (
+		    		this.state.items.slice().reverse().map((i, k) => (
 		    		<div key={k} className={cn("col-4")}>
 		    			<ProductIcon name={i.name} image={`/static/images/${i.user}_${i.id}.jpeg`} />
 		    		</div>

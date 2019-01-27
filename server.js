@@ -12,7 +12,7 @@ const n_app = next({ dev });
 const n_handler = n_app.getRequestHandler();
 
 e_app.use(bodyParser.json());
-e_app.use(bodyParser.urlencoded({ extended: false }));
+e_app.use(bodyParser.urlencoded({ extended: true }));
 e_app.use(cookieParser());
 
 /* static folders */
@@ -40,7 +40,7 @@ e_app.get('*', n_handler);
 
 User.sync({  }).then(() => {});
 
-Item.sync({ }).then(() => {});
+Item.sync({ force: true }).then(() => {});
 
 database.sync().then(() => {
   n_app.prepare().then(() => {

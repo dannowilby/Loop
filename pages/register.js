@@ -37,7 +37,7 @@ const Register = ({ token, error }) => (
 );
 
 const mapStateToProps = (state) => ({
-  error: state.register_error
+  error: state.login.register_error
 });
 
 const mapDispatchToProps = (dispatch) => ({

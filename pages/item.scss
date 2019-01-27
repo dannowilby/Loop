@@ -1,0 +1,13 @@
+
+@import '../util/_vars';
+
+.back {
+	background-color: #F2F2F2;
+
+	width: 100vw;
+	height: 100vh;
+}
+
+.title {
+	@extend .title;
+}

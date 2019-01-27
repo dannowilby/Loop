@@ -3,13 +3,29 @@ import thunkMiddleware from 'redux-thunk';
 
 const SET_TOKEN = 'SET_TOKEN';
 const SET_ERROR = 'SET_ERROR';
+const SET_USER = 'SET_USER';
+const ADD_ITEMS = 'ADD_ITEMS';
 
 const initial_state = {
-  token: '',
-  register_error: '',
+  login: {
+    token: '',
+    register_error: '',
+  },
+  user: {},
+  items: []
 };
 
-const reducer = (state = initial_state, action) => {
+const user = (state = initial_state.user, action) => {
+  switch(action.type) {
+
+    case SET_USER:
+      return { user: action.user };
+
+    default: return state;
+  }
+};
+
+const login = (state = initial_state.login, action) => {
 
   switch(action.type) {
 
@@ -19,8 +35,25 @@ const reducer = (state = initial_state, action) => {
       return { ...state, register_error: action.error };
 
     default: return state;
+  };
+};
+
+const items = (state = initial_state.items, action) => {
+  
+  switch(action.type) {
+
+    case ADD_ITEMS:
+      return [ ...items, action.items];
+
+    default: return state;
   }
 };
+
+const reducer = (state = initial_state, action) => ({
+  login: login(state.login, action),
+  user: user(state.user, action),
+  items: items(state.items, action)
+});
 
 const set_token = (token) => (
   {
