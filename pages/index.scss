@@ -1,0 +1,40 @@
+
+@import '../util/_vars';
+
+.title {
+	@extend .title;
+}
+
+.button {
+	background-color: #ED5764;
+	border-radius: 5px;
+
+	color: #fff;
+
+	padding: 1rem;
+
+	transition: .25s;
+
+	&:hover {
+		background-color: transparent;
+		
+		color: #ED5764;
+
+		border: solid 2px #ED5764;
+
+		transition: .25s;	
+	}
+}
+
+.link {
+	float: right;
+	color: #333;
+}
+
+.search {
+	width: 50%;
+	margin-left: 5rem;
+
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}

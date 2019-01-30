@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import axios from 'axios';
-import { set_token, set_error } from '../state/store';
+import { set_token, set_error, set_user } from '../state/store';
 
 const login = (dispatch, user, pass) => {
   axios.post('/auth/login', {
@@ -9,6 +9,7 @@ const login = (dispatch, user, pass) => {
   }).then(resp => {
 
     dispatch(set_token((resp.data.token)));
+    dispatch(set_user((resp.data.user)));
     Router.push('/');
   }).catch(err => {
 

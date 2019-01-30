@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import Link from 'next/link';
+import Router from 'next/router';
 import {
   InputGroup,
   InputGroupAddon,
@@ -40,8 +41,6 @@ class Item extends Component {
 	submitFile () {
 		axios.defaults.headers.common['Authorization'] = `Bearer ${this.props.token}`;
 
-		console.log(document.getElementById('price').value);
-
 		const formData = new FormData();
 		formData.append('recfile', this.state.file);
 		formData.append('item_name', document.getElementById('name').value);
@@ -54,7 +53,9 @@ class Item extends Component {
 			formData, 
 			{ headers: { 'content-type': 'multipart/form-data' }
 		}).then(resp => {
-			console.log(resp.data);
+			
+			if(resp.data.message == 'success');
+				Router.push('/');
 		});
 	}
 
@@ -71,14 +72,30 @@ class Item extends Component {
 	render() {
 		return (
 			<div className={cn(styles.back)}>
-				<Container className="w-25">
+				<Container className="w-50">
 
-					<Link prefetch href="/"><a className={cn(styles.title, 'text-center', 'd-block')}>loop</a></Link>
+					<Link prefetch href="/"><a className={cn(styles.title, 'text-center', 'd-block','py-4')}>loop</a></Link>
 
-					<FormGroup>
-						<Label>Item Name</Label>
-						<Input type="text" id="name" placeholder="item" />
-					</FormGroup>
+					<div className={cn(styles.image_insert, 'p-4')}>
+						<p>Image</p>
+						<Input className="my-4 mx-auto" type="file" name="recfile" onChange={(e) => { this.onFileChange(e) }} />
+					</div>
+
+					<div className={cn(styles.card, 'p-4', 'my-4')}>
+						
+						<FormGroup>
+							<Label>Name of Item</Label>
+							<Input type="text" id="name" placeholder="Give your item a name" />
+						</FormGroup>
+
+						<FormGroup>
+							<Label>Description</Label>
+							<Input type="text" id="description" placeholder="Describe your item" />
+						</FormGroup>
+						
+					</div>
+
+					<div className={cn(styles.card, 'p-4','my-4')}>
 
 			          <FormGroup>
 				          <Label for="exampleNumber">Price</Label>
@@ -93,18 +110,18 @@ class Item extends Component {
 				          />
 				        </FormGroup>
 
-				     <InputGroup>
-			          <Input id="payment" type="select">
-			          	<option>per Week</option>
-			          	<option>per Month</option>
-			          	<option>per Semester</option>
-			          	<option disabled>to Buy</option>
-			          </Input>
-			        </InputGroup>
+					     <InputGroup className={cn("my-3")}>
+				          <Input id="payment" type="select">
+				          	<option>per Week</option>
+				          	<option>per Month</option>
+				          	<option>per Semester</option>
+				          	<option disabled>to Buy</option>
+				          </Input>
+				        </InputGroup>
+				        <p className={cn("my-0", "d-block", "text-right", "text-muted")}>+10% service fee</p>
+			        </div>
 
-					<Input className="d-block my-4 px-1" type="textarea" id="description" placeholder="Description" />
-					<Input className="d-block my-4" type="file" name="recfile" onChange={(e) => { this.onFileChange(e) }} />
-					<Button onClick={() => { this.submitFile() }} outline color="primary">Submit Item</Button>
+					<Button className={cn(styles.list, "mx-auto", "d-block", "text-center")} onClick={() => { this.submitFile() }} outline color="danger">List</Button>
 				</Container>
 			</div>
 		);

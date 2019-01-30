@@ -1,0 +1,26 @@
+
+@import '../util/_vars';
+
+.title {
+	@extend .title;
+}
+
+.content {
+	width: 100vw;
+	height: 100vh;
+
+	background: url('/static/images/checkoutPage.png');
+	background-size: cover;
+}
+
+.image_holder {
+
+	width: 50%;
+
+	overflow: hidden;
+
+	.image {
+		width: 100%;
+
+	}
+}
